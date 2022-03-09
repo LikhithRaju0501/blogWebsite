@@ -1,0 +1,19 @@
+.tablePart{
+    margin:10vh
+}
+
+
+
+  @media only screen and (max-width: 550px) {
+    .tablePart{
+        margin:10vh 5vh 0 5vh
+    }
+    
+  }
+
+  
+  @media only screen and (max-width: 450px) {
+    .tablePart{
+        margin:10vh 0 0 0
+    }
+  }

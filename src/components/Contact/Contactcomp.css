@@ -1,0 +1,61 @@
+.contactcard{
+    margin: 10vh 10vw 0 10vw;
+    height: 80vh;
+    border: 1px solid black;
+}
+
+.contactImage{
+    background-image: url('../../Assests/cardimg5.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;  
+    height:80vh;
+    display: grid;
+    grid-template-columns: 30vw 30vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactemail{
+    width:30vw;
+    height: 30vh;
+    border:1px solid white;
+    background-color: white;
+}
+
+.contactnumber{
+    width:30vw;
+    height: 30vh;
+    border:1px solid white;
+    background-color: white;
+}
+
+.contactheading{
+    font-family: 'Smooch Sans', sans-serif;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.contactdetails{
+    text-align: center;
+    font-family: 'BhuTuka Expanded One', cursive;
+    font-weight: 100;
+}
+
+@media only screen and (max-width: 600px) {
+    .contactImage{ 
+        grid-template-columns: 30vw;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .contactdetails{
+        font-size: 2.5vh;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .contactdetails{
+        font-size: 1.5vh;
+    }
+  }

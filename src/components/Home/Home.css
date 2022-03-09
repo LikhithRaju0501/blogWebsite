@@ -1,0 +1,23 @@
+.allCards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media only screen and (max-width: 1100px) {
+    .allCards{
+        grid-template-columns: 1fr 1fr 1fr 
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .allCards{
+        grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  
+  @media only screen and (max-width: 650px) {
+    .allCards{
+        grid-template-columns: 1fr ;
+    }
+  }

@@ -1,0 +1,39 @@
+.bgImage{
+    width: 100vw;
+    height: 40vh;
+    border:2px solid black;
+    background-image: url('../../Assests/background-destination-desktop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 9vh;
+}
+
+.homeHeading{
+    text-align: center;
+    margin-top: 2vh;
+    color: white;
+    font-size: 10vh;
+}
+
+@media only screen and (max-width: 600px){
+    .homeHeading{
+        font-size: 8vh;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .homeHeading{
+        margin-top: 3vh;
+        font-size: 5vh;
+    }
+    .bgImage{
+        margin-top: 10vh;
+    }
+}
+
+
+@media only screen and (max-width: 295px){
+    .bgImage{
+        margin-top: 15vh;
+    }
+}

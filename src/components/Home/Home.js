@@ -13,9 +13,9 @@ const Home = () => {
     <Navbarcomp /> 
     <Techforumcomp />
     <div className='allCards'>
-      {blogs.map((item)=>{
+      {blogs.map((res)=>{
         return(
-          <Cardcomp key={item.id} blog={item} />
+          <Cardcomp key={res.id} blog={res} />
         )
       })}
     </div>

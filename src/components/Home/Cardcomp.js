@@ -17,7 +17,7 @@ const Cardcomp = (props) => {
     <div className='cardComp'>
     <Link to='/blogContent' style={{ textDecoration: 'none', color:'black'}}>
         <div className="imgCard" style={{backgroundImage:"url(" + bg + ")"}}></div>
-        <div className="authorCard" style={{textTransform:'uppercase'}}>POSTED BY {props.blog.author} | {props.blog.date}</div>
+        <div className="authorCard" style={{textTransform:'uppercase'}}>POSTED BY :{props.blog.author} | {props.blog.date}</div>
         <div className="categoryCard" style={{textTransform:'uppercase'}}>{props.blog.category.trim()===''? 'General':props.blog.category}</div>
         <div className="headingCard" style={{textTransform:'uppercase'}}>{props.blog.title}</div>
     </Link>

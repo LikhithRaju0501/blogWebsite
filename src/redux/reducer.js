@@ -30,20 +30,22 @@ export const blogReducer=(state=blogState, action)=>{
                 author:action.author,
                 date:action.date,
                 category:action.category,
-                content:action.content
+                content:action.content,
+                image:action.image
             }
             else {
                 const lastIndex = state[state.length-1].id
-                console.log(lastIndex);
                 temp={
                     id:lastIndex+1,
                     title:action.title,
                     author:action.author,
                     date:action.date,
                     category:action.category,
-                    content:action.content
+                    content:action.content,
+                    image:action.image
                 }
             }
+            console.log(state);
             return state=[...state,temp];
         default:
             return state

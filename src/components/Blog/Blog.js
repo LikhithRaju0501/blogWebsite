@@ -1,118 +1,174 @@
-import React,{useState}from 'react'
-import Navbarcomp from '../Navbar/Navbarcomp'
-import { InputGroup, FormControl,Button, Form } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
-import {addEntry, setshowCard} from '../../redux/action'
+import React, { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import Navbarcomp from "../Navbar/Navbarcomp";
+import { InputGroup, FormControl, Button, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addEntry, setshowCard } from "../../redux/action";
 import { useNavigate } from "react-router-dom";
-import './Blog.css'
+import "./Blog.css";
 
 const Blog = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+  const [image, setimage] = useState();
 
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
-    const [title, settitle] = useState('')
-    const [author, setauthor] = useState('')
-    const [category, setcategory] = useState('')
-    const [content, setcontent] = useState('')
-    const [date, setdate] = useState('2022-02-02')
-    const handleSubmit=()=>{
-        if(title.trim()=="" ||
-         title.trim().length <3 
-         )alert("Invalid Title")
+  const validations = {
+    title: { required: "Title is required" },
+    author: { required: "Author is required" },
+    category: { required: "Category is required" },
+    content: {
+      required: "Content of your blog is required",
+      minLength: {
+        value: 30,
+        message: "Content should be minimun 30 characters",
+      },
+    },
+    date: { required: "Date is required" },
+  };
 
-         if(author.trim()=="" ||
-         author.trim().length <3 
-         )alert("Invalid Author Name")
+  const formSubmit = (data) => {
+    console.log('data',data,'image',image);
+    dispatch(
+      addEntry(
+        data.title,
+        data.author,
+        data.date,
+        data.category,
+        data.content,
+        image
+      )
+    );
 
-         if(content.trim()=="" 
-        //||  content.trim().length <30
-         )alert("Content cannot be less than 30 Charecters")
+    dispatch(setshowCard());
 
-        //  console.log(title);
-        //  console.log(author);
-        //  console.log(category);
-        //  console.log(content);
-        //  console.log(date);
+    let path = "/";
+    navigate(path);
+  };
 
-        dispatch(addEntry(
-          title,
-          author,
-          date,
-          category,
-          content
-        ))
+  const formError = (errors) => {
+    console.log(errors);
+    // errors?.title && alert(errors.title.message);
+    // errors?.author && alert(errors.author.message);
+    // errors?.category && alert(errors.category.message);
+    // errors?.date && alert(errors.date.message);
+    // errors?.content && alert(errors.content.message);
+  };
 
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setimage(base64);
+  };
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
 
-        dispatch(setshowCard())
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
 
-        let path = '/'; 
-        navigate(path);
-         
-    }
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
   return (
     <div>
-        <Navbarcomp />
-        <div className="formPart">
-        <form >
-        <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Title</InputGroup.Text>
-        <FormControl
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-        value={title}
-        onChange={(e)=>settitle(e.target.value)}
-        />
-        </InputGroup>
+      <Navbarcomp />
+      <div className="formPart">
+        <form onSubmit={handleSubmit(formSubmit, formError)}>
+          <InputGroup className="mb-1">
+            <InputGroup.Text id="basic-addon1">Title</InputGroup.Text>
+            <Controller
+              name="title"
+              control={control}
+              rules={validations.title}
+              render={({ field }) => (
+                <FormControl
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                 {...field}
+                />
+              )}
+            />
+          </InputGroup>
+          <div className="errorMessage">{errors?.title?.message}</div>
+          <InputGroup>
+            <InputGroup.Text id="basic-addon1">Author</InputGroup.Text>
+            <FormControl
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              name="author"
+              {...register("author", validations.author)}
+            />
+          </InputGroup>
+          <div className="errorMessage">{errors?.author?.message}</div>
+          <InputGroup>
+            <InputGroup.Text id="basic-addon1">Post Date</InputGroup.Text>
+            <FormControl
+              type="date"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              name="date"
+              {...register("date", validations.date)}
+            />
+          </InputGroup>
+          <div className="errorMessage">{errors?.date?.message}</div>
+          <InputGroup>
+            <InputGroup.Text id="basic-addon1">Post Category</InputGroup.Text>
+            <FormControl
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              name="category"
+              {...register("category", validations.category)}
+            />
+          </InputGroup>
+          <div className="errorMessage">{errors?.category?.message}</div>
+          <Form.Control
+            as="textarea"
+            placeholder="Post Your Content Here"
+            style={{ height: "30vh", marginBottom: "1vh" }}
+            name="content"
+            {...register("content", validations.content)}
+          />
+          <div className="errorMessage">{errors?.content?.message}</div>
+          <br />
+          <Form.Group controlId="formFileSm">
+            <Form.Label>Upload Blog Image</Form.Label>
+            <Form.Control
+              onChange={(e) => handleImage(e)}
+              type="file"
+              accept="image/*"
+              size="sm"
+            />
+          </Form.Group>{" "}<br />
+{image ? (
+  <div>
+    <img src={image} width="100%" height="200px" /> <br /> <br />
+  </div>
+) : (
+  <div></div>
+)}
 
-        <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Author</InputGroup.Text>
-        <FormControl
-         aria-label="Username"
-         aria-describedby="basic-addon1"
-         value={author}
-          onChange={(e)=>setauthor(e.target.value)}
-        />
-        </InputGroup>
-
-
-
-        <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Post Date</InputGroup.Text>
-        <FormControl
-        type='date'
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-        value={date}
-        onChange={(e)=>setdate(e.target.value)}
-        />
-        </InputGroup>
-
-
-
-
-        <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">Post Category</InputGroup.Text>
-        <FormControl
-        aria-label="Username"
-         aria-describedby="basic-addon1"
-         value={category}
-         onChange={(e)=>setcategory(e.target.value)}
-        />
-        </InputGroup>
-
-        <Form.Control
-      as="textarea"
-      placeholder="Post Your Content Here"
-      style={{ height: '30vh', marginBottom:'1vh' }}
-      value={content}
-      onChange={(e)=>setcontent(e.target.value)}
-    />
-        <Button onClick={handleSubmit} variant="success">POST</Button>
+           <br />
+          <Button type="submit" variant="success">
+            POST
+          </Button>
         </form>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Blog
+export default Blog;
+
+

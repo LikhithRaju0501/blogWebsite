@@ -9,6 +9,8 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import Forumcomp from './components/Forums/Forumcomp';
 import Contactcomp from './components/Contact/Contactcomp';
+import BlogContent from './components/BlogContent/BlogContent';
+import UseFormComponent from './components/UseFormComponent/UseFormComponent';
 
 const store=createStore(rootReducer)
 
@@ -22,6 +24,8 @@ ReactDOM.render(
       <Route path="/blog" element={<Blog />} />
       <Route path="/forums" element={<Forumcomp />} />
       <Route path="/contact" element={<Contactcomp />} />
+      <Route path="/blogContent/:id" element={<BlogContent />} />
+      <Route path="/useForm" element={<UseFormComponent />} />
     </Routes>
     </Provider>
   </React.StrictMode>

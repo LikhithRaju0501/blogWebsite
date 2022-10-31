@@ -7,13 +7,14 @@ import './Home.css'
 
 const Home = () => {
   const blogs=useSelector((state)=>state.blogReducer)
-  console.log(blogs);
+  // console.log(blogs);
   return (
     <div>
     <Navbarcomp /> 
     <Techforumcomp />
     <div className='allCards'>
       {blogs.map((item)=>{
+        console.log(item.id);
         return(
           <Cardcomp key={item.id} blog={item} />
         )

@@ -1,11 +1,12 @@
-export const addEntry=(title,author,date,category,content)=>{
+export const addEntry=(title,author,date,category,content,image)=>{
     return {
         type:'ADD_ENTRY',
         title,
         author,
         date,
         category,
-        content
+        content,
+        image
     }
 }
 

@@ -1,0 +1,38 @@
+.title{
+    text-align: center;
+    font-family: 'Nabla', cursive;
+    font-size: 50px;
+}
+
+.author{
+    text-align: center;
+}
+
+.authorName{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.date{
+    text-align: center;
+}
+
+.dateName{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.category{
+    text-align: center;
+}
+
+.categoryName{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.content{
+    text-align: center;
+    /* border:1px solid black; */
+    margin: 5vh 2vw 0 2vw;
+    padding: 1vh 2vw 1vh 2vw;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24),0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 6px rgba(0, 0, 0, 0.12);
+
+}

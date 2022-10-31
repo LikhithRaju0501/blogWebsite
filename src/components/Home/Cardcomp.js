@@ -7,6 +7,7 @@ import bg3 from '../../Assests/cardimg3.webp'
 import bg4 from '../../Assests/cardimg4.webp'
 
 const Cardcomp = (props) => {
+  console.log(props);
   let bg=bg1;
   if(props.blog.id % 1 ===0)bg=bg1;
   if(props.blog.id % 2 ===0)bg=bg2;
@@ -15,8 +16,11 @@ const Cardcomp = (props) => {
   return (
       <div className="cardGroup">
     <div className='cardComp'>
-    <Link to='/blogContent' style={{ textDecoration: 'none', color:'black'}}>
-        <div className="imgCard" style={{backgroundImage:"url(" + bg + ")"}}></div>
+    <Link to={`/blogContent/${props.blog.id}`} style={{ textDecoration: 'none', color:'black'}}>
+      {props.blog.image?
+    <img src={props.blog.image} className='imgCard' />:
+    <div className="imgCard" style={{backgroundImage:"url(" + bg + ")"}}></div>  
+    }
         <div className="authorCard" style={{textTransform:'uppercase'}}>POSTED BY :{props.blog.author} | {props.blog.date}</div>
         <div className="categoryCard" style={{textTransform:'uppercase'}}>{props.blog.category.trim()===''? 'General':props.blog.category}</div>
         <div className="headingCard" style={{textTransform:'uppercase'}}>{props.blog.title}</div>

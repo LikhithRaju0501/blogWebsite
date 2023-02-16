@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Navbarcomp from "../Navbar/Navbarcomp";
 import { InputGroup, FormControl, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addEntry, setshowCard } from "../../redux/action";
@@ -80,7 +79,6 @@ const Blog = () => {
 
   return (
     <div>
-      <Navbarcomp />
       <div className="formPart">
         <form onSubmit={handleSubmit(formSubmit, formError)}>
           <InputGroup className="mb-1">

@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import Forumcomp from "./components/Forums/Forumcomp";
 import Contactcomp from "./components/Contact/Contactcomp";
 import BlogContent from "./components/BlogContent/BlogContent";
+import Navbarcomp from "./components/Navbar/Navbarcomp";
 
 const store = createStore(rootReducer);
 
@@ -17,6 +18,7 @@ ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <Provider store={store}>
+        <Navbarcomp />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="*" element={<App />} />

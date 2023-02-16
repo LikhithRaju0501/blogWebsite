@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Navbarcomp from "../Navbar/Navbarcomp";
 import { InputGroup, FormControl, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,6 @@ const Blog = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm();
 
@@ -34,7 +33,6 @@ const Blog = () => {
   };
 
   const formSubmit = (data) => {
-    console.log('data',data,'image',image);
     dispatch(
       addEntry(
         data.title,
@@ -53,12 +51,11 @@ const Blog = () => {
   };
 
   const formError = (errors) => {
-    console.log(errors);
-    // errors?.title && alert(errors.title.message);
-    // errors?.author && alert(errors.author.message);
-    // errors?.category && alert(errors.category.message);
-    // errors?.date && alert(errors.date.message);
-    // errors?.content && alert(errors.content.message);
+    errors?.title && alert(errors.title.message);
+    errors?.author && alert(errors.author.message);
+    errors?.category && alert(errors.category.message);
+    errors?.date && alert(errors.date.message);
+    errors?.content && alert(errors.content.message);
   };
 
   const handleImage = async (e) => {
@@ -88,17 +85,11 @@ const Blog = () => {
         <form onSubmit={handleSubmit(formSubmit, formError)}>
           <InputGroup className="mb-1">
             <InputGroup.Text id="basic-addon1">Title</InputGroup.Text>
-            <Controller
+            <FormControl
+              aria-label="Username"
+              aria-describedby="basic-addon1"
               name="title"
-              control={control}
-              rules={validations.title}
-              render={({ field }) => (
-                <FormControl
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                 {...field}
-                />
-              )}
+              {...register("title", validations.title)}
             />
           </InputGroup>
           <div className="errorMessage">{errors?.title?.message}</div>
@@ -150,16 +141,17 @@ const Blog = () => {
               accept="image/*"
               size="sm"
             />
-          </Form.Group>{" "}<br />
-{image ? (
-  <div>
-    <img src={image} width="100%" height="200px" /> <br /> <br />
-  </div>
-) : (
-  <div></div>
-)}
-
-           <br />
+          </Form.Group>
+          <br />
+          {image ? (
+            <div>
+              <img src={image} width="100%" height="200px" alt="BlogImage" />
+              <br /> <br />
+            </div>
+          ) : (
+            <div></div>
+          )}
+          <br />
           <Button type="submit" variant="success">
             POST
           </Button>
@@ -170,5 +162,3 @@ const Blog = () => {
 };
 
 export default Blog;
-
-

@@ -33,9 +33,6 @@ const Navbarcomp = () => {
               <Link to="/forums" style={{ textDecoration: "none" }}>
                 <Nav style={{ color: "white", marginRight: "1vw" }}>FORUMS</Nav>
               </Link>
-              <Link to="/useForm" style={{ textDecoration: "none" }}>
-                <Nav style={{ color: "white" }}>USEFORM</Nav>
-              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
